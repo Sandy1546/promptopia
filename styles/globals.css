@@ -147,6 +147,12 @@
 }
 /* PromptCard component over */
 
+/* Sign Component */
+.sign-wrapper {
+  max-width: 380px;
+}
+/* Sign Component Over */
+
 .flex_center {
   @apply flex justify-center items-center;
 }
