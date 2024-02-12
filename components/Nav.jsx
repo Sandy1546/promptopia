@@ -133,7 +133,7 @@ const Nav = () => {
                   }}
                   className="mt-5 w-full black_btn"
                 >
-                  Sign Outtt
+                  Sign Out
                 </button>
               </div>
             )}

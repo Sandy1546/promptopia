@@ -153,6 +153,10 @@
 }
 /* Sign Component Over */
 
+.approve-wrapper {
+  font-size: 12px;
+}
+
 .flex_center {
   @apply flex justify-center items-center;
 }

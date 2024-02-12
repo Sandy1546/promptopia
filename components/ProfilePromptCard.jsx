@@ -5,7 +5,13 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
-const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
+const ProfilePromptCard = ({
+  post,
+  handleEdit,
+  handleDelete,
+  handleTagClick,
+}) => {
+  //   console.log(post);
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
@@ -43,7 +49,6 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
             height={40}
             className="rounded-full object-contain"
           />
-
           <div className="flex flex-col">
             <h3 className="font-satoshi font-semibold text-gray-900">
               {post.creator.userName}
@@ -76,8 +81,20 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
         #{post.tag}
       </p>
 
+      {post.isPublic ? (
+        <p className="flex_end font-inter text-sm text-gray-600">Public</p>
+      ) : (
+        <p className="flex_end font-inter text-sm text-gray-600">Private</p>
+      )}
+
+      {!post.isApproved && (
+        <p className="approve-wrapper font-inter text-sm text-gray-500 mt-2 flex_center">
+          **We'll shortly check and approve your prompt**
+        </p>
+      )}
+
       {session?.user.id === post.creator._id && pathName === "/profile" && (
-        <div className="mt-5 flex_center gap-4 border-t border-gray-100 pt-3">
+        <div className="mt-2 flex_center gap-4 border-t border-gray-100 pt-3">
           <p
             className="font-inter text-sm green_gradient cursor-pointer"
             onClick={handleEdit}
@@ -96,4 +113,4 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   );
 };
 
-export default PromptCard;
+export default ProfilePromptCard;

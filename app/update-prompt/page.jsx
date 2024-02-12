@@ -12,16 +12,18 @@ const UpdatePrompt = () => {
   const promptId = searchParams.get("id");
 
   const [submitting, setSubmitting] = useState(false);
-  const [post, setPost] = useState({ prompt: "", tag: "" });
+  const [post, setPost] = useState({ prompt: "", tag: "", isPublic: true });
 
   useEffect(() => {
     const getPromptDetails = async () => {
       const response = await fetch(`/api/prompt/${promptId}`);
       const data = await response.json();
+      // console.log(data);
 
       setPost({
         prompt: data.prompt,
         tag: data.tag,
+        isPublic: data.isPublic,
       });
     };
 
@@ -42,6 +44,7 @@ const UpdatePrompt = () => {
           prompt: post.prompt,
           //   userId: session?.user.id,
           tag: post.tag,
+          isPublic: post.isPublic,
         }),
       });
 
@@ -54,6 +57,8 @@ const UpdatePrompt = () => {
       setSubmitting(false);
     }
   };
+
+  // console.log(post);
 
   return (
     <Form

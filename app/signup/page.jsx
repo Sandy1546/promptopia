@@ -18,7 +18,7 @@ const Signup = () => {
   const createAccount = async (e) => {
     e.preventDefault();
 
-    console.log(userData);
+    // console.log(userData);
     setCreate(true);
 
     try {

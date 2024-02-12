@@ -1,6 +1,9 @@
+import ProfilePromptCard from "./ProfilePromptCard";
 import PromptCard from "./PromptCard";
 
 const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
+  const a = true;
+
   return (
     <section className="w-full">
       <h1 className="head_text text-left">
@@ -10,7 +13,7 @@ const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
 
       <div className="mt-10 prompt_layout">
         {data.map((post) => (
-          <PromptCard
+          <ProfilePromptCard
             key={post._id}
             post={post}
             handleEdit={() => handleEdit && handleEdit(post)}

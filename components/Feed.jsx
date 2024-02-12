@@ -27,38 +27,40 @@ const Feed = () => {
 
   const filterPrompts = (searchtext) => {
     const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
-    // const a = posts.filter((item) => {
-    // console.log(item);
-    // regex.test(item.creator.userName) ||
-    // regex.test(item.tag);
-    // regex.test(item.prompt);
-    // });
-    // console.log(e);
 
-    return posts.filter((item) => {
-      // console.log(item);
-      regex.test(item.creator.username) ||
+    const filteredResult = posts.filter(
+      (item) =>
+        regex.test(item.creator.username) ||
         regex.test(item.tag) ||
-        regex.test(item.prompt);
-    });
+        regex.test(item.prompt)
+    );
+
+    return filteredResult;
   };
 
   const handleSearchChange = (e) => {
-    console.log(e);
-    // clearTimeout(searchTimeout);
+    clearTimeout(searchTimeout);
     setSearchText(e.target.value);
 
     // debounce method
-    // setSearchTimeout(
-    // setTimeout(() => {
-    const searchResult = filterPrompts(e.target.value);
-    setSearchedResults(searchResult);
-    // }, 500)
-    // );
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = filterPrompts(e.target.value);
+        setSearchedResults(() => searchResult);
+      }, 500)
+    );
 
     // const searchResult = filterPrompts(e.target.value);
     // // console.log(searchResult);
     // setSearchedResults(searchResult);
+  };
+
+  // TagClick filter
+  const handleTagClick = (tagName) => {
+    setSearchText(tagName);
+
+    const searchResult = filterPrompts(tagName);
+    setSearchedResults(searchResult);
   };
 
   return (
@@ -76,9 +78,12 @@ const Feed = () => {
 
       {/* All prompts */}
       {searchText ? (
-        <PromptCardList data={searchedResults} handleTagClick={() => {}} />
+        <PromptCardList
+          data={searchedResults}
+          handleTagClick={handleTagClick}
+        />
       ) : (
-        <PromptCardList data={posts} handleTagClick={() => {}} />
+        <PromptCardList data={posts} handleTagClick={handleTagClick} />
       )}
     </section>
   );
