@@ -1,5 +1,4 @@
 import { connectToDB } from "@utils/database";
-import Article from "@models/article";
 import Prompt from "@models/prompt";
 
 //GET path
